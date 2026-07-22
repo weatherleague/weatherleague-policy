@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웨더리그 — 우리 동네에서 경쟁하는 전 세계 일기예보</title>
+<meta name="description" content="전 세계 기상청 모델과 기상청 예보를 매일 실제 날씨와 대조해 채점하는 날씨 앱, 웨더리그">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --day:#5B8DD9; --night:#1E3A66;
+    --glass:rgba(255,255,255,.14); --glass-border:rgba(255,255,255,.28);
+    --ink:#FFFFFF; --sub:rgba(255,255,255,.82); --muted:rgba(255,255,255,.62);
+    --gold:#F0C468;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:linear-gradient(180deg,var(--day) 0%,#3E5C87 45%,var(--night) 100%);
+    background-attachment:fixed;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{max-width:720px;margin:0 auto;padding:0 20px 64px}
+
+  /* ── 히어로 ── */
+  .hero{padding:72px 0 40px;text-align:center}
+  .hero img{width:96px;height:96px;border-radius:24px;
+    box-shadow:0 8px 32px rgba(0,0,0,.25);border:1px solid var(--glass-border)}
+  .hero h1{font-size:2.1rem;font-weight:800;margin:18px 0 8px;letter-spacing:-.02em}
+  .hero p{font-size:1.05rem;color:var(--sub);margin:0;text-wrap:balance}
+
+  /* ── 컨셉 ── */
+  .concept{padding:36px 0 8px;text-align:center}
+  .concept h2{font-size:1.45rem;font-weight:700;line-height:1.45;margin:0 0 14px;
+    letter-spacing:-.01em;text-wrap:balance}
+  .concept p{color:var(--sub);font-size:.98rem;margin:0 auto;max-width:34em;text-wrap:pretty}
+
+  /* ── 앱 캡처 자리 ── */
+  .shots{display:flex;gap:14px;overflow-x:auto;padding:30px 4px 10px;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .shot{flex:0 0 200px;aspect-ratio:9/19.5;border-radius:22px;scroll-snap-align:center;
+    background:var(--glass);border:1.5px dashed var(--glass-border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-size:.82rem}
+  /* 캡처 교체 방법: .shot div를 <img class="shot" src="..."> 로 바꾸면 됩니다 */
+
+  /* ── 특징 카드 ── */
+  .features{display:grid;grid-template-columns:1fr;gap:14px;padding:28px 0 8px}
+  @media (min-width:560px){.features{grid-template-columns:1fr 1fr}}
+  .card{
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:22px;
+    padding:20px 22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .card .k{display:inline-block;font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.06em;margin-bottom:6px}
+  .card h3{font-size:1.06rem;font-weight:700;margin:0 0 6px}
+  .card p{font-size:.9rem;color:var(--sub);margin:0}
+
+  /* ── 푸터 ── */
+  footer{margin-top:44px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18);
+    text-align:center}
+  .badge{display:inline-block;background:var(--glass);border:1px solid var(--glass-border);
+    border-radius:999px;padding:8px 18px;font-size:.92rem;font-weight:600}
+  footer .mail{margin:16px 0 6px;font-size:.9rem}
+  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .legal{font-size:.82rem;color:var(--muted)}
+  .legal a{color:var(--muted)}
+  .copy{font-size:.76rem;color:var(--muted);margin-top:18px}
+</style>
+</head>
+<body>
+<main>
+  <!-- ① 히어로 -->
+  <section class="hero">
+    <img src="icon.png" alt="웨더리그 앱 아이콘">
+    <h1>웨더리그</h1>
+    <p>우리 동네에서 경쟁하는 전 세계 일기예보</p>
+  </section>
+
+  <!-- ② 컨셉 (온보딩 1화면 문구) -->
+  <section class="concept">
+    <h2>우리 동네에서 누가<br>날씨를 제일 잘 맞출까요?</h2>
+    <p>전 세계 기상청 모델과 기상청 예보를 매일 실제 날씨와 대조해 채점해요.
+       동네를 알려주시면 이 동네 1위 채널 기준으로 날씨를 브리핑해 드릴게요.</p>
+  </section>
+
+  <!-- 앱 캡처 자리 (운영자 선별분으로 교체 예정) -->
+  <section class="shots" aria-label="앱 화면 미리보기">
+    <div class="shot">앱 캡처 자리 1</div>
+    <div class="shot">앱 캡처 자리 2</div>
+    <div class="shot">앱 캡처 자리 3</div>
+  </section>
+
+  <!-- ③ 특징 4개 -->
+  <section class="features">
+    <div class="card">
+      <span class="k">리그</span>
+      <h3>국가별 신뢰도 리그</h3>
+      <p>세계 각국의 기상 모델 12개 채널이 우리 동네 적중률(%)로 매일 순위를 겨뤄요.
+         지역마다 챔피언이 달라요.</p>
+    </div>
+    <div class="card">
+      <span class="k">판정</span>
+      <h3>어제의 판정</h3>
+      <p>어제 예보를 실제 관측과 대조해 비 오전·오후, 하늘, 기온까지
+         적중·빗나감을 날마다 공개해요.</p>
+    </div>
+    <div class="card">
+      <span class="k">브리핑</span>
+      <h3>아침·저녁 브리핑</h3>
+      <p>정한 시각에 이 동네 1위 채널 기준으로 하루 날씨를 알려드려요.
+         우산이 필요한 날엔 미리 챙겨 드릴게요.</p>
+    </div>
+    <div class="card">
+      <span class="k">위젯</span>
+      <h3>홈 화면 위젯</h3>
+      <p>지금 기온과 오늘의 흐름을 홈 화면에서 바로.
+         1위 채널이 바뀌면 위젯도 함께 바뀌어요.</p>
+    </div>
+  </section>
+
+  <!-- ④ 푸터 -->
+  <footer>
+    <span class="badge">Google Play 출시 준비 중</span>
+    <p class="mail">문의 <a href="mailto:contact.weatherleague@gmail.com">contact.weatherleague@gmail.com</a></p>
+    <p class="legal">
+      <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a>
+    </p>
+    <p class="copy">© 2026 웨더리그</p>
+  </footer>
+</main>
+</body>
+</html>
