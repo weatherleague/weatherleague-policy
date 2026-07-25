@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
-    --day:#5B8DD9; --night:#1E3A66;
+    --sky:#1B4A8E; --brand:#123976; --deep:#142A5D;   /* 새 브랜드 네이비 (아이콘·스플래시와 통일) */
     --glass:rgba(255,255,255,.14); --glass-border:rgba(255,255,255,.28);
     --ink:#FFFFFF; --sub:rgba(255,255,255,.82); --muted:rgba(255,255,255,.62);
     --gold:#F0C468;
@@ -18,7 +18,7 @@
   body{
     margin:0; color:var(--ink);
     font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    background:linear-gradient(180deg,var(--day) 0%,#3E5C87 45%,var(--night) 100%);
+    background:linear-gradient(180deg,var(--sky) 0%,var(--brand) 45%,var(--deep) 100%);
     background-attachment:fixed;
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
@@ -46,7 +46,7 @@
     display:flex;align-items:center;justify-content:center;
     color:var(--muted);font-size:.82rem}
   /* 실제 캡처 이미지: 빈 칸(dashed) 대신 꽉 채우고 실선 테두리 */
-  img.shot{object-fit:cover;border-style:solid;background:none;
+  img.shot{object-fit:cover;border-style:solid;background:none;min-width:0;
     box-shadow:0 8px 32px rgba(0,0,0,.22)}
   /* 캡처 교체 방법: .shot div를 <img class="shot" src="..."> 로 바꾸면 됩니다 */
 
