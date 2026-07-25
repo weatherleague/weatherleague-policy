@@ -45,6 +45,9 @@
     background:var(--glass);border:1.5px dashed var(--glass-border);
     display:flex;align-items:center;justify-content:center;
     color:var(--muted);font-size:.82rem}
+  /* 실제 캡처 이미지: 빈 칸(dashed) 대신 꽉 채우고 실선 테두리 */
+  img.shot{object-fit:cover;border-style:solid;background:none;
+    box-shadow:0 8px 32px rgba(0,0,0,.22)}
   /* 캡처 교체 방법: .shot div를 <img class="shot" src="..."> 로 바꾸면 됩니다 */
 
   /* ── 특징 카드 ── */
@@ -87,11 +90,11 @@
        동네를 알려주시면 이 동네 1위 채널 기준으로 날씨를 브리핑해 드릴게요.</p>
   </section>
 
-  <!-- 앱 캡처 자리 (운영자 선별분으로 교체 예정) -->
+  <!-- 앱 캡처 (운영자 선별분 2026-07-25) -->
   <section class="shots" aria-label="앱 화면 미리보기">
-    <div class="shot">앱 캡처 자리 1</div>
-    <div class="shot">앱 캡처 자리 2</div>
-    <div class="shot">앱 캡처 자리 3</div>
+    <img class="shot" src="shot-home.jpg" alt="웨더리그 홈 화면 — 현재 날씨와 이 동네 종합 1위 채널">
+    <img class="shot" src="shot-league.jpg" alt="국가별 신뢰도 리그 — 12개 채널의 우리 동네 적중률 순위">
+    <img class="shot" src="shot-verdict.jpg" alt="어제의 판정 — 예보를 실제 관측과 대조한 적중·빗나감 채점">
   </section>
 
   <!-- ③ 특징 4개 -->
