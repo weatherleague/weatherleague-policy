@@ -1,139 +1,40 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>웨더리그 — 우리 동네에서 경쟁하는 전 세계 일기예보</title>
-<meta name="description" content="전 세계 기상청 모델과 기상청 예보를 매일 실제 날씨와 대조해 채점하는 날씨 앱, 웨더리그">
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>
-  :root{
-    --sky:#1B4A8E; --brand:#123976; --deep:#142A5D;   /* 새 브랜드 네이비 (아이콘·스플래시와 통일) */
-    --glass:rgba(255,255,255,.14); --glass-border:rgba(255,255,255,.28);
-    --ink:#FFFFFF; --sub:rgba(255,255,255,.82); --muted:rgba(255,255,255,.62);
-    --gold:#F0C468;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; color:var(--ink);
-    font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    background:linear-gradient(180deg,var(--sky) 0%,var(--brand) 45%,var(--deep) 100%);
-    background-attachment:fixed;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  main{max-width:720px;margin:0 auto;padding:0 20px 64px}
-
-  /* ── 히어로 ── */
-  .hero{padding:72px 0 40px;text-align:center}
-  .hero img{width:96px;height:96px;border-radius:24px;
-    box-shadow:0 8px 32px rgba(0,0,0,.25);border:1px solid var(--glass-border)}
-  .hero h1{font-size:2.1rem;font-weight:800;margin:18px 0 8px;letter-spacing:-.02em}
-  .hero p{font-size:1.05rem;color:var(--sub);margin:0;text-wrap:balance}
-
-  /* ── 컨셉 ── */
-  .concept{padding:36px 0 8px;text-align:center}
-  .concept h2{font-size:1.45rem;font-weight:700;line-height:1.45;margin:0 0 14px;
-    letter-spacing:-.01em;text-wrap:balance}
-  .concept p{color:var(--sub);font-size:.98rem;margin:0 auto;max-width:34em;text-wrap:pretty}
-
-  /* ── 앱 캡처 자리 ── */
-  .shots{display:flex;gap:14px;overflow-x:auto;padding:30px 4px 10px;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .shot{flex:0 0 200px;aspect-ratio:9/19.5;border-radius:22px;scroll-snap-align:center;
-    background:var(--glass);border:1.5px dashed var(--glass-border);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--muted);font-size:.82rem}
-  /* 실제 캡처 이미지: 빈 칸(dashed) 대신 꽉 채우고 실선 테두리 */
-  img.shot{object-fit:cover;border-style:solid;background:none;min-width:0;
-    box-shadow:0 8px 32px rgba(0,0,0,.22)}
-  /* 캡처 교체 방법: .shot div를 <img class="shot" src="..."> 로 바꾸면 됩니다 */
-
-  /* ── 특징 카드 ── */
-  .features{display:grid;grid-template-columns:1fr;gap:14px;padding:28px 0 8px}
-  @media (min-width:560px){.features{grid-template-columns:1fr 1fr}}
-  .card{
-    background:#142A5D;border:1px solid var(--glass-border);border-radius:22px;
-    padding:20px 22px;
-  }
-  .card .k{display:inline-block;font-size:.78rem;font-weight:700;color:var(--gold);
-    letter-spacing:.06em;margin-bottom:6px}
-  .card h3{font-size:1.06rem;font-weight:700;margin:0 0 6px}
-  .card p{font-size:.9rem;color:var(--sub);margin:0}
-
-  /* ── 푸터 ── */
-  footer{margin-top:44px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18);
-    text-align:center}
-  .badge{display:inline-block;background:#142A5D;border:1px solid var(--glass-border);
-    border-radius:999px;padding:8px 18px;font-size:.92rem;font-weight:600}
-  footer .mail{margin:16px 0 6px;font-size:.9rem}
-  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-  .legal{font-size:.82rem;color:var(--muted)}
-  .legal a{color:var(--muted)}
-  .copy{font-size:.76rem;color:var(--muted);margin-top:18px}
-</style>
-</head>
-<body>
-<main>
-  <!-- ① 히어로 -->
-  <section class="hero">
-    <img src="icon.png" alt="웨더리그 앱 아이콘">
-    <h1>웨더리그</h1>
-    <p>우리 동네에서 경쟁하는 전 세계 일기예보</p>
-  </section>
-
-  <!-- ② 컨셉 (온보딩 1화면 문구) -->
-  <section class="concept">
-    <h2>우리 동네에서 누가<br>날씨를 제일 잘 맞출까요?</h2>
-    <p>전 세계 기상청 모델과 기상청 예보를 매일 실제 날씨와 대조해 채점해요.
-       동네를 알려주시면 이 동네 1위 채널 기준으로 날씨를 브리핑해 드릴게요.</p>
-  </section>
-
-  <!-- 앱 캡처 (운영자 선별분 2026-07-25) -->
-  <section class="shots" aria-label="앱 화면 미리보기">
-    <img class="shot" src="shot-home.jpg" alt="웨더리그 홈 화면 — 현재 날씨와 이 동네 종합 1위 채널">
-    <img class="shot" src="shot-league.jpg" alt="국가별 신뢰도 리그 — 12개 채널의 우리 동네 적중률 순위">
-    <img class="shot" src="shot-verdict.jpg" alt="어제의 판정 — 예보를 실제 관측과 대조한 적중·빗나감 채점">
-  </section>
-
-  <!-- ③ 특징 4개 -->
-  <section class="features">
-    <div class="card">
-      <span class="k">리그</span>
-      <h3>국가별 신뢰도 리그</h3>
-      <p>세계 각국의 기상 모델 12개 채널이 우리 동네 적중률(%)로 매일 순위를 겨뤄요.
-         지역마다 챔피언이 달라요.</p>
-    </div>
-    <div class="card">
-      <span class="k">판정</span>
-      <h3>어제의 판정</h3>
-      <p>어제 예보를 실제 관측과 대조해 비 오전·오후, 하늘, 기온까지
-         적중·빗나감을 날마다 공개해요.</p>
-    </div>
-    <div class="card">
-      <span class="k">브리핑</span>
-      <h3>아침·저녁 브리핑</h3>
-      <p>정한 시각에 이 동네 1위 채널 기준으로 하루 날씨를 알려드려요.
-         우산이 필요한 날엔 미리 챙겨 드릴게요.</p>
-    </div>
-    <div class="card">
-      <span class="k">위젯</span>
-      <h3>홈 화면 위젯</h3>
-      <p>지금 기온과 오늘의 흐름을 홈 화면에서 바로.
-         1위 채널이 바뀌면 위젯도 함께 바뀌어요.</p>
-    </div>
-  </section>
-
-  <!-- ④ 푸터 -->
-  <footer>
-    <span class="badge">Google Play 출시 준비 중</span>
-    <p class="mail">문의 <a href="mailto:contact.weatherleague@gmail.com">contact.weatherleague@gmail.com</a></p>
-    <p class="legal">
-      <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a>
-    </p>
-    <p class="copy">© 2026 웨더리그</p>
-  </footer>
-</main>
-</body>
-</html>
+<!DOCTYPE html><html lang="ko"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>웨더리그 — 우리 동네에서 경쟁하는 전 세계 일기예보</title><meta name="description" content="기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와 대조해 채점해요. 우리 동네에서 제일 잘 맞는 날씨 채널을 알려드리는 앱, 웨더리그."><link rel="canonical" href="https://weatherleague.github.io/weatherleague-policy/"><link rel="icon" type="image/png" href="/weatherleague-policy/icon.png"><meta property="og:type" content="website"><meta property="og:site_name" content="웨더리그"><meta property="og:title" content="웨더리그 — 우리 동네에서 경쟁하는 전 세계 일기예보"><meta property="og:description" content="기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와 대조해 채점해요. 우리 동네에서 제일 잘 맞는 날씨 채널을 알려드리는 앱, 웨더리그."><meta property="og:url" content="https://weatherleague.github.io/weatherleague-policy/"><meta property="og:image" content="https://weatherleague.github.io/weatherleague-policy/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"웨더리그","operatingSystem":"Android","applicationCategory":"WeatherApplication","description":"기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와 대조해 채점해요. 우리 동네에서 제일 잘 맞는 날씨 채널을 알려드리는 앱, 웨더리그.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"url":"https://weatherleague.github.io/weatherleague-policy/","installUrl":"https://play.google.com/store/apps/details?id=com.weatherleague.app"}</script><noscript><style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+      </style></noscript><link rel="stylesheet" href="/weatherleague-policy/_astro/index.CMMKI8vd.css"></head> <body> <header class="site-header"> <div class="container header-inner"> <a class="logo" href="/weatherleague-policy/"> <img src="/weatherleague-policy/icon.png" alt="" width="30" height="30">
+웨더리그
+</a> <nav class="nav" aria-label="주 메뉴"> <a class="nav-link" href="/weatherleague-policy/blog/">블로그</a> <a class="btn btn-navy" href="mailto:contact.weatherleague@gmail.com?subject=%5B%EC%9B%A8%EB%8D%94%EB%A6%AC%EA%B7%B8%20%EC%A0%9C%ED%9C%B4%20%EB%AC%B8%EC%9D%98%5D">제휴 문의</a> </nav> </div> </header>   <section class="hero"> <div class="hero-bg" aria-hidden="true"> <div class="dots"></div> <div class="glow"></div> <div class="glow2"></div> </div> <div class="container hero-grid"> <div> <span class="eyebrow" data-reveal>매일 채점하는 날씨, 웨더리그</span> <h1 class="headline" data-reveal style="--d:.05s">
+우리 동네에서 누가<br> <span class="accent">날씨를 제일 잘 맞출까요?</span> </h1> <p class="lead" data-reveal style="--d:.1s">
+기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와
+          대조해 채점해요. 동네를 알려주시면 그 동네 1위 채널 기준으로
+          날씨를 브리핑해 드릴게요.
+</p> <div class="cta-row" data-reveal style="--d:.15s"> <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.weatherleague.app"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M5 3.5v17a.7.7 0 0 0 1.06.6l14.2-8.5a.7.7 0 0 0 0-1.2L6.06 2.9A.7.7 0 0 0 5 3.5Z"></path> </svg>
+Google Play에서 받기
+</a> <span class="cta-note">지금 심사 진행 중 · 곧 출시돼요</span> </div> <div class="hero-chips" data-reveal style="--d:.2s"> <span class="chip"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3Z"></path> <path d="m9.2 11.6 2 2 3.6-4"></path> </svg>
+실제 관측으로 검증
+</span> <span class="chip"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M12 21s-6.5-5.2-6.5-10a6.5 6.5 0 0 1 13 0c0 4.8-6.5 10-6.5 10Z"></path> <circle cx="12" cy="11" r="2.4"></circle> </svg>
+전국 257개 시·군·구
+</span> <span class="chip"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path> <circle cx="12" cy="12" r="2.8"></circle> </svg>
+판정 근거 전부 공개
+</span> </div> </div> <div class="mockups" data-reveal style="--d:.15s" aria-label="웨더리그 앱 화면 미리보기"> <div class="float float-b"> <div class="phone"> <img src="/weatherleague-policy/shot-league.jpg" alt="우리 동네 신뢰도 리그 — 11개 채널의 동네별 적중률 순위" loading="eager"> </div> </div> <div class="float float-a"> <div class="phone"> <img src="/weatherleague-policy/shot-home.jpg" alt="웨더리그 홈 화면 — 현재 날씨와 이 동네 1위 채널의 브리핑" loading="eager"> </div> </div> <span class="tag tag-hit"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#1B7A3D"> <path d="m4.5 12.5 5 5 10-11"></path> </svg>
+어제의 판정 · <b class="ok">적중</b> </span> <span class="tag tag-trophy"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M8 21h8M12 17v4M7 4h10v4.5a5 5 0 0 1-10 0V4Z"></path> <path d="M7 5H4.5a2.8 2.8 0 0 0 2.9 3.4M17 5h2.5a2.8 2.8 0 0 1-2.9 3.4"></path> </svg>
+우리 동네 1위 채널
+</span> </div> </div> </section>  <section class="block" aria-label="웨더리그 채점 규모"> <div class="container"> <div class="stats-band" data-reveal> <div class="stat"><b>11개</b><span>매일 채점하는 채널</span></div> <div class="stat"><b>257곳</b><span>전국 시·군·구</span></div> <div class="stat"><b>2,800여 건</b><span>하루에 채점하는 예보</span></div> </div> </div> </section>  <section class="block"> <div class="container"> <div class="sec-head" data-reveal> <h2>감이 아니라 성적으로 고르는 날씨</h2> <p>
+웨더리그는 예보를 예쁘게 보여주는 앱이 아니라,
+          어제 예보가 맞았는지 오늘 채점하는 앱이에요.
+</p> </div> <div class="features"> <div class="feature" data-reveal> <div class="icon t-gold"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M8 21h8M12 17v4M7 4h10v4.5a5 5 0 0 1-10 0V4Z"></path> <path d="M7 5H4.5a2.8 2.8 0 0 0 2.9 3.4M17 5h2.5a2.8 2.8 0 0 1-2.9 3.4"></path> </svg> </div> <span class="k gold">리그</span> <h3>우리 동네 신뢰도 리그</h3> <p>
+기상청 예보와 세계 9개 기상 모델 등 11개 채널이 우리 동네
+            적중률(%)로 매일 순위를 겨뤄요. 지역마다 챔피언이 달라요.
+</p> </div> <div class="feature" data-reveal style="--d:.08s"> <div class="icon t-green"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="4" y="4" width="16" height="17" rx="3"></rect> <path d="M9 2.5v3M15 2.5v3M8.5 13l2.4 2.4 4.6-5"></path> </svg> </div> <span class="k green">판정</span> <h3>어제의 판정</h3> <p>
+어제 예보를 실제 관측과 대조해 비 오전·오후, 하늘, 기온까지
+            적중·빗나감을 날마다 공개해요.
+</p> </div> <div class="feature" data-reveal style="--d:.16s"> <div class="icon t-blue"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"></path> <path d="M10 19a2.2 2.2 0 0 0 4 0"></path> </svg> </div> <span class="k blue">브리핑</span> <h3>아침·저녁 브리핑</h3> <p>
+정한 시각에 이 동네 1위 채널 기준으로 하루 날씨를 알려드려요.
+            우산이 필요한 날엔 미리 챙겨 드릴게요.
+</p> </div> <div class="feature" data-reveal style="--d:.24s"> <div class="icon t-navy"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"></rect> <rect x="13" y="3.5" width="7.5" height="7.5" rx="2"></rect> <rect x="3.5" y="13" width="7.5" height="7.5" rx="2"></rect> <rect x="13" y="13" width="7.5" height="7.5" rx="2"></rect> </svg> </div> <span class="k navy">위젯</span> <h3>홈 화면 위젯</h3> <p>
+지금 기온과 오늘의 흐름을 홈 화면에서 바로.
+            1위 채널이 바뀌면 위젯도 함께 바뀌어요.
+</p> </div> </div> </div> </section>  <section class="block"> <div class="container"> <div class="sec-head" data-reveal> <h2>채점은 이렇게 해요</h2> <p>사람 손 없이, 매일 같은 기준으로 돌아가요.</p> </div> <div class="steps"> <div class="step" data-reveal> <div class="num">1</div> <h3>예보를 저장해요</h3> <p>매일 아침, 11개 채널이 내놓은 오늘 예보를 발표 시각과 함께 기록해요.</p> </div> <div class="step" data-reveal style="--d:.1s"> <div class="num">2</div> <h3>실제 날씨와 대조해요</h3> <p>다음 날, 실제 관측 기록과 비교해 비·하늘·기온의 적중과 빗나감을 판정해요.</p> </div> <div class="step" data-reveal style="--d:.2s"> <div class="num">3</div> <h3>적중률로 줄을 세워요</h3> <p>최근 30일 성적을 모아 우리 동네에서 제일 잘 맞는 채널을 알려드려요.</p> </div> </div> </div> </section>  <div class="container cta-wrap"> <section class="cta-band" data-reveal> <div class="dots2" aria-hidden="true"></div> <h2>우리 동네 1위 예보, 지금 확인해 보세요</h2> <p>매일 아침, 어제 제일 잘 맞힌 채널이 오늘 날씨를 알려드려요.</p> <a class="btn btn-play btn-play-light" href="https://play.google.com/store/apps/details?id=com.weatherleague.app"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M5 3.5v17a.7.7 0 0 0 1.06.6l14.2-8.5a.7.7 0 0 0 0-1.2L6.06 2.9A.7.7 0 0 0 5 3.5Z"></path> </svg>
+Google Play에서 받기
+</a> <span class="cta-note">지금 심사 진행 중 · 곧 출시돼요</span> </section> </div>  <footer class="site-footer"> <div class="container footer-inner"> <div> <div class="f-brand"> <img src="/weatherleague-policy/icon.png" alt="" width="24" height="24">
+웨더리그
+</div> <p class="f-copy">© 2026 웨더리그</p> </div> <nav class="f-links" aria-label="사이트 정보"> <a href="/weatherleague-policy/privacy.html">개인정보처리방침</a> <a href="/weatherleague-policy/terms.html">이용약관</a> <a href="mailto:contact.weatherleague@gmail.com">문의</a> </nav> </div> </footer> <script type="module">const s=document.querySelector(".site-header"),t=()=>s?.classList.toggle("scrolled",window.scrollY>8);t();addEventListener("scroll",t,{passive:!0});const o=new IntersectionObserver(e=>{for(const r of e)r.isIntersecting&&(r.target.classList.add("in"),o.unobserve(r.target))},{threshold:.15,rootMargin:"0px 0px -40px 0px"});document.querySelectorAll("[data-reveal]").forEach(e=>o.observe(e));</script> </body> </html>
