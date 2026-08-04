@@ -74,7 +74,7 @@ img { max-width: 100%; }
   font-size: 1.08rem;
 }
 .logo img { width: 30px; height: 30px; border-radius: 8px; }
-.nav { display: flex; align-items: center; gap: 6px; }
+.nav { display: flex; align-items: center; gap: 18px; }
 .nav-link {
   padding: 8px 12px;
   font-weight: 600;
