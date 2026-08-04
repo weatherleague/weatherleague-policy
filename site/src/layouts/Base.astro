@@ -85,17 +85,14 @@ const MAIL = 'contact.weatherleague@gmail.com';
       onScroll();
       addEventListener('scroll', onScroll, { passive: true });
 
-      // 스크롤 등장 연출
+      // 스크롤 등장 연출 — 화면을 벗어나면 초기화해서, 다시 스크롤해 오면 재생된다
       const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
-            if (e.isIntersecting) {
-              e.target.classList.add('in');
-              io.unobserve(e.target);
-            }
+            e.target.classList.toggle('in', e.isIntersecting);
           }
         },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
       );
       document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
     </script>

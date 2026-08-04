@@ -6,7 +6,7 @@ const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.weatherleagu
 
 const title = '웨더리그 — 우리 동네에서 경쟁하는 전 세계 일기예보';
 const description =
-  '기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와 대조해 채점해요. 우리 동네에서 제일 잘 맞는 날씨 채널을 알려드리는 앱, 웨더리그.';
+  '기상청 예보와 세계 9개 기상 모델, 웨더리그 앙상블, 오픈웨더까지 12개 채널을 매일 실제 관측과 대조해 채점해요. 우리 동네에서 제일 잘 맞는 날씨 채널을 알려드리는 앱, 웨더리그.';
 
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -31,15 +31,13 @@ const jsonLd = JSON.stringify({
     </div>
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow" data-reveal>매일 채점하는 날씨, 웨더리그</span>
         <h1 class="headline" data-reveal style="--d:.05s">
-          우리 동네에서 누가<br />
-          <span class="accent">날씨를 제일 잘 맞출까요?</span>
+          우리 동네에서 경쟁하는<br />
+          <span class="accent shine">전 세계 일기예보</span>
         </h1>
         <p class="lead" data-reveal style="--d:.1s">
-          기상청 예보와 세계 9개 기상 모델 등 11개 채널을 매일 실제 날씨와
-          대조해 채점해요. 동네를 알려주시면 그 동네 1위 채널 기준으로
-          날씨를 브리핑해 드릴게요.
+          동네마다 1등 예보는 달라요.<br />
+          우리 동네 1등만 보여드릴게요.
         </p>
         <div class="cta-row" data-reveal style="--d:.15s">
           <a class="btn btn-play" href={PLAY_URL}>
@@ -48,29 +46,28 @@ const jsonLd = JSON.stringify({
             </svg>
             Google Play에서 받기
           </a>
-          <span class="cta-note">지금 심사 진행 중 · 곧 출시돼요</span>
         </div>
         <div class="hero-chips" data-reveal style="--d:.2s">
           <span class="chip">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3Z" />
-              <path d="m9.2 11.6 2 2 3.6-4" />
+              <circle cx="12" cy="12" r="8.6" />
+              <path d="M3.4 12h17.2M12 3.4c2.9 2.4 2.9 14.8 0 17.2M12 3.4c-2.9 2.4-2.9 14.8 0 17.2" />
             </svg>
-            실제 관측으로 검증
+            국내외 12개 예보 비교
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.6" />
+              <path d="m8.2 12.4 2.6 2.6 5-5.6" />
+            </svg>
+            기상청 관측 일단위 채점
           </span>
           <span class="chip">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 21s-6.5-5.2-6.5-10a6.5 6.5 0 0 1 13 0c0 4.8-6.5 10-6.5 10Z" />
               <circle cx="12" cy="11" r="2.4" />
             </svg>
-            전국 257개 시·군·구
-          </span>
-          <span class="chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
-              <circle cx="12" cy="12" r="2.8" />
-            </svg>
-            판정 근거 전부 공개
+            우리 동네 자동 순위
           </span>
         </div>
       </div>
@@ -78,7 +75,7 @@ const jsonLd = JSON.stringify({
       <div class="mockups" data-reveal style="--d:.15s" aria-label="웨더리그 앱 화면 미리보기">
         <div class="float float-b">
           <div class="phone">
-            <img src={`${base}/shot-league.jpg`} alt="우리 동네 신뢰도 리그 — 11개 채널의 동네별 적중률 순위" loading="eager" />
+            <img src={`${base}/shot-league.jpg`} alt="우리 동네 신뢰도 리그 — 12개 채널의 동네별 적중률 순위" loading="eager" />
           </div>
         </div>
         <div class="float float-a">
@@ -86,19 +83,6 @@ const jsonLd = JSON.stringify({
             <img src={`${base}/shot-home.jpg`} alt="웨더리그 홈 화면 — 현재 날씨와 이 동네 1위 채널의 브리핑" loading="eager" />
           </div>
         </div>
-        <span class="tag tag-hit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#1B7A3D">
-            <path d="m4.5 12.5 5 5 10-11" />
-          </svg>
-          어제의 판정 · <b class="ok">적중</b>
-        </span>
-        <span class="tag tag-trophy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M8 21h8M12 17v4M7 4h10v4.5a5 5 0 0 1-10 0V4Z" />
-            <path d="M7 5H4.5a2.8 2.8 0 0 0 2.9 3.4M17 5h2.5a2.8 2.8 0 0 1-2.9 3.4" />
-          </svg>
-          우리 동네 1위 채널
-        </span>
       </div>
     </div>
   </section>
@@ -107,9 +91,9 @@ const jsonLd = JSON.stringify({
   <section class="block" aria-label="웨더리그 채점 규모">
     <div class="container">
       <div class="stats-band" data-reveal>
-        <div class="stat"><b>11개</b><span>매일 채점하는 채널</span></div>
-        <div class="stat"><b>257곳</b><span>전국 시·군·구</span></div>
-        <div class="stat"><b>2,800여 건</b><span>하루에 채점하는 예보</span></div>
+        <div class="stat"><b>12개</b><span>매일 채점하는 국내외 채널</span></div>
+        <div class="stat"><b>723곳</b><span>관측소 발표 대조</span></div>
+        <div class="stat"><b>+2,800건</b><span>하루에 채점하는 예보</span></div>
       </div>
     </div>
   </section>
@@ -135,8 +119,9 @@ const jsonLd = JSON.stringify({
           <span class="k gold">리그</span>
           <h3>우리 동네 신뢰도 리그</h3>
           <p>
-            기상청 예보와 세계 9개 기상 모델 등 11개 채널이 우리 동네
-            적중률(%)로 매일 순위를 겨뤄요. 지역마다 챔피언이 달라요.
+            기상청 예보와 세계 9개 기상 모델, 웨더리그 앙상블, 오픈웨더까지
+            12개 채널이 우리 동네 적중률(%)로 매일 순위를 겨뤄요.
+            지역마다 챔피언이 달라요.
           </p>
         </div>
         <div class="feature" data-reveal style="--d:.08s">
@@ -198,7 +183,7 @@ const jsonLd = JSON.stringify({
         <div class="step" data-reveal>
           <div class="num">1</div>
           <h3>예보를 저장해요</h3>
-          <p>매일 아침, 11개 채널이 내놓은 오늘 예보를 발표 시각과 함께 기록해요.</p>
+          <p>매일 아침, 12개 채널이 내놓은 오늘 예보를 발표 시각과 함께 기록해요.</p>
         </div>
         <div class="step" data-reveal style="--d:.1s">
           <div class="num">2</div>
@@ -226,7 +211,6 @@ const jsonLd = JSON.stringify({
         </svg>
         Google Play에서 받기
       </a>
-      <span class="cta-note">지금 심사 진행 중 · 곧 출시돼요</span>
     </section>
   </div>
 </Base>
